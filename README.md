@@ -25,7 +25,7 @@ To use libinterposer, it has to analyze the targeted binary first in order to cr
 After creation, the interposer library lies in the build folder. It can be preloaded via LD_PRELOAD into any process.
 
 ```
-LD_PRELOAD=/home/krakan/git/library_interpose/build/libintercept.so path_to_binary
+LD_PRELOAD=/home/frederikptk/git/library_interpose/build/libintercept.so path_to_binary
 ```
 
 However, this technique is not very reliable. Since the preloaded library is loaded first into the process memory space, the dynamic linker will find all symbols exported by the preloaded library first (before their actual definition). But other loaded libraries also rely on the actual functions. For example, a program using calloc cannot be used with libinterposer since dlsym relies on this function. This would result in a cyclis dependency.
@@ -34,7 +34,7 @@ However, this technique is not very reliable. Since the preloaded library is loa
 As an example, the test binary in the test folder can be used.
 ```
 ./create_interpose_lib.sh test/test
-LD_PRELOAD=/home/krakan/git/library_interpose/build/libintercept.so test/test
+LD_PRELOAD=/home/frederikptk/git/library_interpose/build/libintercept.so test/test
 mv build/symbols ./symbols
 ```
 This will lead to the following output:
